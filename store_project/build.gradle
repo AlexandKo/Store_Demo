@@ -1,0 +1,33 @@
+dependencies {
+    testCompile ('junit:junit:4.13.1')
+    compileOnly ('org.projectlombok:lombok:1.18+')
+    annotationProcessor ('org.projectlombok:lombok:1.18+')
+    compile ('commons-validator:commons-validator:1.7')
+    compile ('com.googlecode.libphonenumber:libphonenumber:8.12.12')
+    compile ('org.telegram:telegrambots:5.0.1')
+    compile ('org.slf4j:slf4j-nop:1.7.30')
+    testCompile ('org.mockito:mockito-core:3.6.28')
+    compile ('commons-io:commons-io:2.8.0')
+    compile ('org.springframework:spring-context:5.2.12.RELEASE')
+    testCompile ('org.springframework:spring-test:5.2.12.RELEASE')
+    compile ('org.springframework:spring-context-support:5.2.12.RELEASE')
+    compile ('com.sun.mail:javax.mail:1.6.2')
+    compile ('mysql:mysql-connector-java:8.0.22')
+    compile ('org.springframework.boot:spring-boot-starter-data-jpa:2.4.1') {
+        exclude (group: 'ch.qos.logback', module: 'logback-classic')
+    }
+    compile ('org.springframework.boot:spring-boot-starter-web:2.4.1') {
+        exclude (group: 'ch.qos.logback', module: 'logback-classic')
+    }
+    compile ('org.springframework.boot:spring-boot-starter-thymeleaf:2.4.1') {
+        exclude (group: 'ch.qos.logback', module: 'logback-classic')
+    }
+    compile ('org.reactivestreams:reactive-streams:1.0.3')
+    compile ('org.liquibase:liquibase-core:4.2.2')
+    compile ('org.springframework.boot:spring-boot-devtools:2.4.2')
+    implementation ('org.springframework.boot:spring-boot-starter-security:2.4.2') {
+        exclude (group: 'ch.qos.logback', module: 'logback-classic')
+    }
+    implementation ('com.itextpdf:itextpdf:5.5.13.2')
+    implementation ('com.squareup.okhttp3:okhttp:4.9.1')
+}

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous">
+    <meta name="description" content="Internet Store demo project">
+    <meta name="author" content="Aleksey Kodin">
+
+    <title>EStore</title>
+    <style>
+    .header-h3_center {
+        text-align: center;
+    }
+    .text_align_left {
+         text-align: left;
+    }
+    .vertical_align {
+        vertical-align: bottom;
+    }
+    body {
+        padding-top: 60px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #FFCC33;">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img style="max-width:100px; margin-top: -5px;" src="/images/estore.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/"><b>Home</b>
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/estore/add_product_for_cart"><b>Cart</b>
+                        <span class="badge badge-light" id="product_count"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><b>About</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><b>About</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/service"><b>Service</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout"><b>Logout</b></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-lg-3">
+
+            <h6 class="my-4">Settings</h6>
+            <ul id="settings">
+                <li><span class="caret">Client Control</span>
+                    <ul class="nested">
+                        <a class="nav-link" href="add_client">Add client</a>
+                        <a class="nav-link" href="view_client">View client</a>
+                        <a class="nav-link" href="delete_client">Delete client</a>
+                        <a class="nav-link" href="update_client">Update client</a>
+                    </ul>
+                <li><span class="caret">Product Control</span>
+                    <ul class="nested">
+                        <a class="nav-link" href="add_product">Add product</a>
+                        <a class="nav-link" href="view_product">View product</a>
+                        <a class="nav-link" href="delete_product">Delete product</a>
+                        <a class="nav-link" href="update_product">Update product</a>
+                    </ul>
+                <li><span class="caret">Order Control</span>
+                    <ul class="nested">
+                        <a class="nav-link" href="order_control">Update order status</a>
+                    </ul>
+            </ul>
+        </div>
+        <!-- /.col-lg-3 -->
+        <div class="col-lg-9">
+            <div class="header-h3_center">
+                <h3>Control menu</h3>
+                <p class="h3"><small>Update product</small></p>
+                <form>
+                    <div class="container-fluid">&nbsp;
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-footer">
+                                        <div class="input-group">
+                                            <input name="search" type="text" placeholder="Find product by title"
+                                                   class="form-group form-control-sm"/> <span class="input-group-btn">
+                                                <button type="submit" formaction="/search_update_product"
+                                                        value="search" formmethod="post"
+                                                        class="btn btn-primary btn-sm" data-toggle="modal"
+                                                        data-target="#infoMessage">
+                                                    Search</button>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-control-sm">
+                        <div class="text_align_left">
+                            <div class="col-md-0">
+                                <label style="margin-bottom:0rem !important;">Product Title</label>
+                            </div>
+                        </div>
+
+                        <input type="text" class="form-control form-control-sm"
+                               th:disabled="${disabled}"
+                               th:field="${product.title}"
+                               aria-describedby="titleHelp"
+                               placeholder="Enter product title" required>
+
+                        <div class="text_align_left">
+                            <div class="col-md-0">
+                                <label style="margin-bottom:0rem !important;">Product
+                                    Description</label>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control form-control-sm"
+                               th:disabled="${disabled}"
+                               th:field="${product.description}"
+                               aria-describedby="descriptionHelp"
+                               placeholder="Enter product description" required>
+
+                        <div class="text_align_left">
+                            <div class="col-md-0">
+                                <label style="margin-bottom:0rem !important;">Product
+                                    Category</label>
+                            </div>
+                        </div>
+
+                        <select class="custom-select custom-select-sm" name="category"
+                                th:field="${product.category}"
+                                th:disabled="${disabled}">
+                            <option value="1">Category 1</option>
+                            <option value="2">Category 2</option>
+                            <option value="3">Category 3</option>
+                        </select>
+
+                        <div class="text_align_left">
+                            <div class="col-md-0">
+                                <label style="margin-bottom:0rem !important;">Product
+                                    Quantity</label>
+                            </div>
+                        </div>
+
+                        <input type="number" step="1" min="0" class="form-control form-control-sm"
+                               th:disabled="${disabled}"
+                               th:field="${product.quantity}"
+                               aria-describedby="quantityHelp"
+                               placeholder="Enter product quantity" required>
+
+                        <div class="text_align_left">
+                            <div class="col-md-0">
+                                <label style="margin-bottom:0rem !important;">Product Price</label>
+                            </div>
+                        </div>
+
+                        <input type="number" step="0.01" min="0" class="form-control form-control-sm"
+                               th:disabled="${disabled}"
+                               th:field="${product.price}"
+                               aria-describedby="priceHelp"
+                               placeholder="Enter product price" required>
+
+                        <p></p>
+                        <button type="submit" formaction="/update_product" th:object="${product}"
+                                th:disabled="${disabled}"
+                                formmethod="post"
+                                data-toggle="modal" data-target="#infoMessage"
+                                class="btn btn-outline-primary">Apply
+                        </button>
+                        <button type="submit" formaction="/update_product_back" formmethod="post"
+                                class="btn btn-outline-secondary">Back
+                        </button>
+
+                        <p></p>
+
+                        <div th:if="${error.length==51}">
+                            <div class="alert alert-danger" role="alert">
+                                <div th:text="${error}"></div>
+                            </div>
+                        </div>
+
+                        <div th:if="${error.length==38}">
+                            <div class="alert alert-success" role="alert">
+                                <div th:text="${error}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.col-lg-9 -->
+    </div>
+</div>
+<!-- /.container -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+        crossorigin="anonymous"></script>
+</body>
+</html>

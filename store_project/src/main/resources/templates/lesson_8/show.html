@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title> Demo </title>
+</head>
+
+<body>
+<h3>Show all records</h3>
+
+<table>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>surname</th>
+        <th>phoneNumber</th>
+        <th>email</th>
+    </tr>
+    <tr th:if="${clientList.empty}">
+        <td colspan="2">No records founded</td>
+    </tr>
+    <tr th:each="client : ${clientList}">
+        <td><span th:text="${client.id}"> id </span></td>
+        <td><span th:text="${client.name}"> name </span></td>
+        <td><span th:text="${client.surname}"> surname </span></td>
+        <td><span th:text="${client.phoneNumber}"> phoneNumber </span></td>
+        <td><span th:text="${client.email}"> email </span></td>
+    </tr>
+</table>
+</body>
+</html>

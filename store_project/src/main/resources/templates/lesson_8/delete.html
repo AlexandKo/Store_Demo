@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title> Demo </title>
+</head>
+
+<body>
+<h3>Delete records</h3>
+<p>Enter record's Id </p>
+
+<form action="/delete" method="post">
+    <p>Id: <input type="text" name="id"/></p>
+    <p><input type="submit" value="Delete"/></p>
+</form>
+
+<tr th:if="${error.length !=0}">
+    <td><font color="red"><span th:text="${error}"></span></font></td>
+</tr>
+</body>
+</html>

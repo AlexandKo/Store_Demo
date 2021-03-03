@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet author="aleksey.kodin" id="4">
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#1"/>
+            <column name="description" value="Description#1"/>
+            <column name="category" value="1"/>
+            <column name="quantity" value="15"/>
+            <column name="price" value="9.65"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#2"/>
+            <column name="description" value="Description#2"/>
+            <column name="category" value="2"/>
+            <column name="quantity" value="18"/>
+            <column name="price" value="102.33"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#3"/>
+            <column name="description" value="Description#3"/>
+            <column name="category" value="3"/>
+            <column name="quantity" value="9"/>
+            <column name="price" value="98.14"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#4"/>
+            <column name="description" value="Description#4"/>
+            <column name="category" value="1"/>
+            <column name="quantity" value="65"/>
+            <column name="price" value="0.47"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#5"/>
+            <column name="description" value="Description#5"/>
+            <column name="category" value="2"/>
+            <column name="quantity" value="8"/>
+            <column name="price" value="45.10"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#6"/>
+            <column name="description" value="Description#6"/>
+            <column name="category" value="3"/>
+            <column name="quantity" value="7"/>
+            <column name="price" value="6.52"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#7"/>
+            <column name="description" value="Description#7"/>
+            <column name="category" value="1"/>
+            <column name="quantity" value="87"/>
+            <column name="price" value="1.74"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#8"/>
+            <column name="description" value="Description#8"/>
+            <column name="category" value="2"/>
+            <column name="quantity" value="93"/>
+            <column name="price" value="10.18"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#9"/>
+            <column name="description" value="Description#9"/>
+            <column name="category" value="3"/>
+            <column name="quantity" value="44"/>
+            <column name="price" value="12.30"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#10"/>
+            <column name="description" value="Description#10"/>
+            <column name="category" value="1"/>
+            <column name="quantity" value="87"/>
+            <column name="price" value="10.03"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#11"/>
+            <column name="description" value="Description#11"/>
+            <column name="category" value="2"/>
+            <column name="quantity" value="19"/>
+            <column name="price" value="6.77"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#12"/>
+            <column name="description" value="Description#12"/>
+            <column name="category" value="3"/>
+            <column name="quantity" value="54"/>
+            <column name="price" value="8.94"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#13"/>
+            <column name="description" value="Description#13"/>
+            <column name="category" value="1"/>
+            <column name="quantity" value="8"/>
+            <column name="price" value="3.15"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#14"/>
+            <column name="description" value="Description#14"/>
+            <column name="category" value="2"/>
+            <column name="quantity" value="75"/>
+            <column name="price" value="0.18"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#15"/>
+            <column name="description" value="Description#15"/>
+            <column name="category" value="3"/>
+            <column name="quantity" value="44"/>
+            <column name="price" value="3.70"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#16"/>
+            <column name="description" value="Description#16"/>
+            <column name="category" value="1"/>
+            <column name="quantity" value="12"/>
+            <column name="price" value="6.74"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#17"/>
+            <column name="description" value="Description#17"/>
+            <column name="category" value="2"/>
+            <column name="quantity" value="11"/>
+            <column name="price" value="6.01"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#18"/>
+            <column name="description" value="Description#18"/>
+            <column name="category" value="3"/>
+            <column name="quantity" value="54"/>
+            <column name="price" value="1.77"/>
+        </insert>
+        <insert dbms="mysql"
+                schemaName="store"
+                tableName="product">
+            <column name="title" value="Product#19"/>
+            <column name="description" value="Description#19"/>
+            <column name="category" value="1"/>
+            <column name="quantity" value="2"/>
+            <column name="price" value="18.70"/>
+        </insert>
+        <rollback>
+            <sql>
+                TRUNCATE product;
+                ALTER TABLE product AUTO_INCREMENT = 1;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

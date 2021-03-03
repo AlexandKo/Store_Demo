@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Demo</title>
+</head>
+<body>
+<h3>Create records</h3>
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>Surname:</td>
+        <td>Phone:</td>
+        <td>E-Mail:</td>
+    </tr>
+
+    <tr>
+        <form action="/create" th:object="${client}" method="post">
+            <td><input type="text" th:field="${client.name}"/></td>
+            <td><input type="text" th:field="${client.surname}"/></td>
+            <td><input type="text" th:field="${client.phoneNumber}"/></td>
+            <td><input type="text" th:field="${client.email}"/></td>
+            <td><input type="submit" value="Create"/>
+                <input type="reset" value="Clear"/></td>
+        </form>
+    </tr>
+</table>
+</body>
+</html>

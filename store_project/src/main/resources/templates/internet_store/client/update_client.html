@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous">
+    <meta name="description" content="Internet Store demo project">
+    <meta name="author" content="Aleksey Kodin">
+
+    <title>EStore</title>
+    <style>
+    .header-h3_center {
+        text-align: center;
+    }
+    .text_align_left {
+         text-align: left;
+    }
+    .vertical_align {
+        vertical-align: bottom;
+    }
+    body {
+        padding-top: 60px;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #FFCC33;">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img style="max-width:100px; margin-top: -5px;" src="/images/estore.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/"><b>Home</b>
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/estore/add_product_for_cart"><b>Cart</b>
+                        <span class="badge badge-light" id="product_count"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><b>About</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><b>About</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/service"><b>Service</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout"><b>Logout</b></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-lg-3">
+
+            <h6 class="my-4">Settings</h6>
+            <ul id="settings">
+                <li><span class="caret">Client Control</span>
+                    <ul class="nested">
+                        <a class="nav-link" href="add_client">Add client</a>
+                        <a class="nav-link" href="view_client">View client</a>
+                        <a class="nav-link" href="delete_client">Delete client</a>
+                        <a class="nav-link" href="update_client">Update client</a>
+                    </ul>
+                <li><span class="caret">Product Control</span>
+                    <ul class="nested">
+                        <a class="nav-link" href="add_product">Add product</a>
+                        <a class="nav-link" href="view_product">View product</a>
+                        <a class="nav-link" href="delete_product">Delete product</a>
+                        <a class="nav-link" href="update_product">Update product</a>
+                    </ul>
+                <li><span class="caret">Order Control</span>
+                    <ul class="nested">
+                        <a class="nav-link" href="order_control">Update order status</a>
+                    </ul>
+            </ul>
+        </div>
+        <!-- /.col-lg-3 -->
+        <div class="col-lg-9">
+            <div class="header-h3_center">
+                <h3>Control menu</h3>
+                <p class="h3"><small>Client data update</small></p>
+                <form>
+                    <div class="container-fluid">&nbsp;
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-footer">
+                                        <div class="input-group">
+                                            <input name="search" type="text" placeholder="Find client"
+                                                   class="form-group form-control-sm"/>
+                                            <span class="input-group-btn">
+                                            <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle btn-sm"
+                                                    type="button" id="dropdownMenu2" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">Search by</button>
+                                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                <button name="clientName" class="dropdown-item" type="submit"
+                                                        formaction="/search_update_client" formmethod="post"
+                                                        value="name" data-value="search">Name</button>
+                                                <button name="clientName" class="dropdown-item" type="submit"
+                                                        formaction="/search_update_client" formmethod="post"
+                                                        value="surname" data-value="search">Surname</button>
+                                                <button name="clientName" class="dropdown-item" type="submit"
+                                                        formaction="/search_update_client" formmethod="post"
+                                                        value="phone" data-value="search">Phone Number</button>
+                                                <button name="clientName" class="dropdown-item" type="submit"
+                                                        formaction="/search_update_client" formmethod="post"
+                                                        value="email" data-value="search">Email Address</button>
+                                            </div>
+                                            </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-control-sm">
+                        <div class="text_align_left">
+                            <div class="col-md-0">
+                                <label style="margin-bottom:0rem !important;">Client Name</label>
+                            </div>
+                        </div>
+
+                        <input type="text" class="form-control form-control-sm"
+                               th:disabled="${disabled}"
+                               th:field="${client.name}"
+                               aria-describedby="titleHelp"
+                               placeholder="Enter client name" required>
+
+                        <div class="text_align_left">
+                            <div class="col-md-0">
+                                <label style="margin-bottom:0rem !important;">Client
+                                    Surname</label>
+                            </div>
+                        </div>
+
+                        <input type="text" class="form-control form-control-sm"
+                               th:disabled="${disabled}"
+                               th:field="${client.surname}"
+                               aria-describedby="descriptionHelp"
+                               placeholder="Enter client surname" required>
+
+                        <div class="text_align_left">
+                            <div class="col-md-0">
+                                <label style="margin-bottom:0rem !important;">Client phone</label>
+                            </div>
+                        </div>
+
+                        <input type="number" class="form-control form-control-sm"
+                               th:disabled="${disabled}"
+                               th:field="${client.phoneNumber}"
+                               aria-describedby="quantityHelp"
+                               placeholder="Enter phone number" required>
+
+                        <div class="text_align_left">
+                            <div class="col-md-0">
+                                <label style="margin-bottom:0rem !important;">Client email</label>
+                            </div>
+                        </div>
+
+                        <input type="email" class="form-control form-control-sm"
+
+                               th:disabled="${disabled}"
+                               th:field="${client.email}"
+                               aria-describedby="priceHelp"
+                               placeholder="Enter email address" required>
+                        <p></p>
+                        <button type="submit" formaction="/update_client" th:object="${client}"
+                                th:disabled="${disabled}"
+                                formmethod="post"
+                                data-toggle="modal" data-target="#infoMessage"
+                                class="btn btn-outline-primary">Apply
+                        </button>
+                        <button type="submit" formaction="/update_client_back" formmethod="post"
+                                class="btn btn-outline-secondary">Back
+                        </button>
+
+                        <p></p>
+
+                        <div th:if="${error.length==51}">
+                            <div class="alert alert-danger" role="alert">
+                                <div th:text="${error}"></div>
+                            </div>
+                        </div>
+
+                        <div th:if="${error.length>51}">
+                            <div class="alert alert-danger" role="alert">
+                                <div th:text="${error}"></div>
+                            </div>
+                        </div>
+
+                        <div th:if="${error.length==38}">
+                            <div class="alert alert-success" role="alert">
+                                <div th:text="${error}"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.col-lg-9 -->
+    </div>
+</div>
+<!-- /.container -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
+
+
+    <meta name="description" content="Internet Store example">
+    <meta name="author" content="Aleksey Kodin">
+
+    <title>EStore</title>
+    <style>
+    body {
+        padding-top: 60px;
+        }
+    .text_align_center {
+         text-align: center;
+    }
+    .text_align_right {
+         text-align: right;
+    }
+    .header-h3_center {
+        text-align: center;
+    }
+    .one_row {
+        display:inline-block
+    }
+
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #FFCC33;">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img style="max-width:100px; margin-top: -5px;" src="/images/estore.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/"><b>Home</b>
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/estore/add_product_for_cart"><b>Cart</b>
+                        <span class="badge badge-light">
+                                <div th:text="${cartCount}"></div>
+                    </span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><b>About</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><b>Contact</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../service"><b>Service</b></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <center>
+                <h3 class="my-4" style="color:#007BFF;">Categories</h3>
+            </center>
+            <div class="list-group">
+                <a href="categories" class="list-group-item"><b>All Categories</b></a>
+                <a href="category_1" class="list-group-item"><b>Category 1</b></a>
+                <a href="category_2" class="list-group-item"><b>Category 2</b></a>
+                <a href="category_3" class="list-group-item"><b>Category 3</b></a>
+            </div>
+            <p></p>
+            <div class="input-group mb-3">
+                <form>
+                    <div class="input-group-append">
+                        <input type="search" name="search" class="form-control form-control-sm" placeholder="Product"
+                               id="search">
+                        <span class="input-group-btn">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle btn-sm"
+                                        type="button" id="dropdownMenu2" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">Search</button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <button name="clientName" class="dropdown-item" type="submit"
+                                            formaction="/search_product" formmethod="post"
+                                            value="name" data-value="search">Search by Title</button>
+                                    <button name="clientName" class="dropdown-item" type="submit"
+                                            formaction="/search_product_price" formmethod="post"
+                                            value="surname" data-value="search">Search by Price</button>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.col-lg-3 -->
+        <div class="col-lg-9">
+            <div class="header-h3_center">
+                <p class="h3"><small>Cart</small></p>
+            </div>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/estore/add_product_for_cart">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/estore/add_client_for_cart">Client</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/estore/cart_make_order">Order</a>
+                </li>
+            </ul>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="text-center">Product Title</th>
+                            <th scope="col" class="text-center">Quantity</th>
+                            <th scope="col" class="text-center"><div th:text="'Price ' + ${currency_symbol}"></div></th>
+                            <th scope="col" class="text-center"><div th:text="'Total ' + ${currency_symbol}"></div></th>
+                            <th scope="col" class="text-center">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="cart : ${cartList}">
+                            <td scope="row" style="vertical-align: middle;" th:text="${cart.getProduct().getTitle()}"></td>
+                            <td scope="row" class="text-center" style="vertical-align: middle;"
+                                th:text="${cart.quantity}"></td>
+                            <td scope="row" class="text-center" style="vertical-align: middle;"
+                                th:text="${cart.getProduct.price}"></td>
+                            <td scope="row" class="text-center" style="vertical-align: middle;"
+                                th:text="${cart.sum}"></td>
+                            <td align="center">
+                                <form action="/estore/deleted_from_cart" method="post">
+                                    <button type="submit" title="Delete" th:name="deletedProduct"
+                                            th:value="${cart.getId}"
+                                            class="btn btn-danger button-center">
+                                        <i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <center>
+                        <div class="one_row">
+                            <form>
+                                <button type="submit" formaction="/estore/view_cart_prev" formmethod="post"
+                                        class="btn btn-outline-primary">
+                                    Prev
+                                </button>
+                            </form>
+                        </div>
+                        <div class="one_row">
+                            <div th:text="${pages}"></div>
+                        </div>
+                        <div class="one_row">
+                            <form>
+                                <button type="submit" formaction="/estore/view_cart_next" formmethod="post"
+                                        class="btn btn-outline-primary">
+                                    Next
+                                </button>
+                            </form>
+                        </div>
+                    </center>
+                    <div align="right">
+                        <div class="one_row">
+                            <h6> Total sum without tax: </h6>
+                        </div>
+                        <div class="one_row">
+                            <h6>
+                                <div th:text="${totalSum}+' '+${currencySymbol}"></div>
+                            </h6>
+                        </div>
+                    </div>
+                    <div align="right">
+                        <div class="one_row">
+                            <h6>Tax</h6>
+                        </div>
+                        <div class="one_row">
+                            <h6>
+                                <div th:text="' '+ ${taxRate}+'%: '+${taxAmount}+' '+${currencySymbol}"></div>
+                            </h6>
+                        </div>
+                    </div>
+                    <div align="right">
+                        <div class="one_row">
+                            <h6>Total sum with tax:</h6>
+                        </div>
+                        <div class="one_row">
+                            <h6>
+                                <div th:text="' '+${total}+' '+${currencySymbol}"></div>
+                            </h6>
+                        </div>
+                    </div>
+                    <p></p>
+                    <div th:if="${info.length>0}">
+                        <div class="text_align_center">
+                            <div class="alert alert-info" role="alert">
+                                <div th:text="${info}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+        crossorigin="anonymous"></script>
+
+<script>
+
+</script>
+
+</body>
+
+</html>

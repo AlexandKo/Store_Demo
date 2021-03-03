@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet author="aleksey.kodin" id="9">
+        <addForeignKeyConstraint baseTableName="cart"
+                                 baseColumnNames="product_id"
+                                 constraintName="fk_product_id"
+                                 referencedTableName="product"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableSchemaName="store"
+                                      baseTableName="cart"
+                                      constraintName="fk_product_id"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

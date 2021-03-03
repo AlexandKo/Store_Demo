@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+    <meta name="description" content="Internet Store example">
+    <meta name="author" content="Aleksey Kodin">
+
+    <title>EStore</title>
+    <style>
+    body {
+        padding-top: 60px;
+        }
+    .text_align_center {
+         text-align: center;
+    }
+    .text_align_right {
+         text-align: right;
+    }
+    .header-h3_center {
+        text-align: center;
+    }
+    .one_row {
+        display:inline-block
+    }
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #FFCC33;">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img style="max-width:100px; margin-top: -5px;" src="/images/estore.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/"><b>Home</b>
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/estore/add_product_for_cart"><b>Cart</b>
+                        <span class="badge badge-light">
+                                <div th:text="${cartCount}"></div>
+                    </span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><b>About</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><b>Contact</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/service"><b>Service</b></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <center>
+                <h3 class="my-4" style="color:#007BFF;">Categories</h3>
+            </center>
+            <div class="list-group">
+                <a href="categories" class="list-group-item"><b>All Categories</b></a>
+                <a href="category_1" class="list-group-item"><b>Category 1</b></a>
+                <a href="category_2" class="list-group-item"><b>Category 2</b></a>
+                <a href="category_3" class="list-group-item"><b>Category 3</b></a>
+            </div>
+            <p></p>
+            <div class="input-group mb-3">
+                <form>
+                    <div class="input-group-append">
+                        <input type="search" name="search" class="form-control form-control-sm" placeholder="Product"
+                               id="search">
+                        <span class="input-group-btn">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle btn-sm"
+                                        type="button" id="dropdownMenu2" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">Search</button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <button name="clientName" class="dropdown-item" type="submit"
+                                            formaction="/search_product" formmethod="post"
+                                            value="name" data-value="search">Search by Title</button>
+                                    <button name="clientName" class="dropdown-item" type="submit"
+                                            formaction="/search_product_price" formmethod="post"
+                                            value="surname" data-value="search">Search by Price</button>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.col-lg-3 -->
+        <div class="col-lg-9">
+            <div class="header-h3_center">
+                <p class="h3"><small>Order</small></p>
+            </div>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="add_product_for_cart">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/estore/add_client_for_cart">Client</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="cart_make_order" th:disabled="disabled">Order</a>
+                </li>
+            </ul>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered" id="tableId">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="text-center">Order Number</th>
+                            <th scope="col" class="text-center">Order Date</th>
+                            <th scope="col" class="text-center"><div th:text="'Sum ' + ${currency_symbol}"></div></th>
+                            <th scope="col" class="text-center"><div th:text="'Tax ' + ${currency_symbol}"></div></th>
+                            <th scope="col" class="text-center"><div th:text="'Total ' + ${currency_symbol}"></div></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td scope="row" class="text-center" style="vertical-align: middle;"
+                                th:text="${order.number}"></td>
+                            <td scope="row" class="text-center" style="vertical-align: middle;"
+                                th:text="${order.date}"></td>
+                            <td scope="row" class="text-center" style="vertical-align: middle;"
+                                th:text="${order.sum}"></td>
+                            <td scope="row" class="text-center" style="vertical-align: middle;"
+                                th:text="${order.tax}"></td>
+                            <td scope="row" class="text-center" style="vertical-align: middle;"
+                                th:text="${order.total}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#fullInformation"
+                            aria-expanded="false" aria-controls="fullInformation">
+                        Full Information about Order
+                    </button>
+                    <div class="collapse" id="fullInformation">
+                        <div class="card card-body">
+                           <b> <div th:text="${client.name==null} and ${client.surname==null} ? 'Client data: n/a' : 'Client data: '
+                            + ${client.name} + ' ' + ${client.surname}"></div> </b>
+                            <div th:text="${client.phoneNumber==null} ? 'Client phone: n/a' : 'Client phone: ' + ${client.phoneNumber}">
+                                <br></div>
+                            <div th:text="${client.email==null} ? 'Client email: n/a' : 'Client email: ' + ${client.email}">
+                                <br></div>
+                            <b>Products list:</b>
+                            <div th:each="item:${items}">
+                                <div th:text="${item.product.getTitle} +
+                                                        ' Quantity: ' +
+                                                        ${item.quantity} + ' Price: ' +
+                                                        ${item.product.getPrice} + ' ' + ${currency_symbol} + ' Total: ' +
+                                                        ${item.sum} + ' ' + ${currency_symbol}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p></p>
+                    <center>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#makeOrder"
+                                th:disabled="${disabled}">Make Order
+                        </button>
+                    </center>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="makeOrder" data-bs-backdrop="static" tabindex="-1"
+                         aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Process finished</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <div th:text="'Order number ' + ${orderNumber} + ' completed.'"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="/estore/make_order" method="post">
+                                        <button type="submit" class="btn btn-primary">Ok</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+</script>
+
+</body>
+
+</html>
